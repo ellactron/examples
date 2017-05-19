@@ -1,0 +1,1 @@
+Reference: http://www.androidhive.info/2016/05/android-build-intro-slider-app/
