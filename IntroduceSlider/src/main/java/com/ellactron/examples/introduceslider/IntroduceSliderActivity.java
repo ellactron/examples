@@ -18,9 +18,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.ellactron.examples.MainActivity;
-import com.ellactron.examples.R;
-
 public class IntroduceSliderActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
@@ -120,7 +117,7 @@ public class IntroduceSliderActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(IntroduceSliderActivity.this, MainActivity.class));
+        startActivity(new Intent(IntroduceSliderActivity.this, HomeActivity.class));
         finish();
     }
 
