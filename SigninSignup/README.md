@@ -1,0 +1,1 @@
+Reference: https://auth0.com/blog/how-to-authenticate-on-android-using-social-logins/
