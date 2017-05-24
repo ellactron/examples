@@ -1,4 +1,4 @@
-package com.ellactron.examples.introduceslider;
+package com.ellactron.examples.user;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ public class PrefManager {
     int PRIVATE_MODE = 0;
 
     // Shared preferences file name
-    private static final String PREF_NAME = "androidhive-welcome";
+    private static final String PREF_NAME = "ellactron_app_preference";
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
@@ -24,6 +24,10 @@ public class PrefManager {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+    }
+
+    public SharedPreferences.Editor getEditor() {
+        return editor;
     }
 
     public void setFirstTimeLaunch(boolean isFirstTime) {

@@ -7,11 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -20,8 +24,14 @@ public class HomeActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                // 获得 FaceBook 登录信息
+                Profile profile = Profile.getCurrentProfile().getCurrentProfile();
+
+                Snackbar.make(view, profile.getFirstName() + " is logging out...", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                // 模拟登出，这样下次再次进入程序时就会出现登录界面。
+                LoginManager.getInstance().logOut();
             }
         });
     }

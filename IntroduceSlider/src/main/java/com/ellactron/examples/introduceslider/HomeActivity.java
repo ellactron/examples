@@ -3,6 +3,8 @@ package com.ellactron.examples.introduceslider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.ellactron.examples.user.PrefManager;
+
 public class HomeActivity extends AppCompatActivity {
     private PrefManager prefManager;
 
@@ -19,8 +21,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         // TODO Auto-generated method stub
         prefManager = new PrefManager(this);
-        prefManager.editor.clear();
-        prefManager.editor.commit();
+        prefManager.getEditor().clear();
+        prefManager.getEditor().commit();
         super.onDestroy();
     }
 }
