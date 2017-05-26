@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.ellactron.examples.signinsignup.HomeActivity;
+import com.ellactron.examples.signinsignup.R;
 import com.ellactron.examples.signinsignup.SocialSigninActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -53,7 +54,10 @@ public class FacebookSignIn {
         }
     }
 
-    public void registerSignInButton(LoginButton mFacebookSignInButton, final Class intentActivity) {
+    public void registerSignInButton(final Class intentActivity) {
+        // 设置认证按钮，这必须在 OAuth2 认证界面初始化完成之后
+        LoginButton mFacebookSignInButton = (LoginButton)activity.findViewById(R.id.facebook_sign_in_button);
+
         mFacebookSignInButton.registerCallback(mFacebookCallbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.ellactron.examples.signinsignup.facebook.FacebookSignIn;
-import com.facebook.login.widget.LoginButton;
 
 public class SocialSigninActivity extends AppCompatActivity {
     static FacebookSignIn fb;
@@ -14,21 +13,20 @@ public class SocialSigninActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // 初始化认证SDK 并检查登录状态
+        // 初始化认证 SDK 并检查登录状态
         initialOAuth2Sdk();
 
         if(isUserLoggedIn()) {
             showMainWindow();
-            return;
         }
+        else {
+            // 初始化OAuth2认证界面，这必须在 OAuth2 认证 SDK 初始化和回调管理器生成之后执行。
+            setContentView(R.layout.activity_social_oauth2);
 
-        // 初始化OAuth2认证界面，这必须在 OAuth2 认证 SDK 初始化和回调管理器生成之后执行。
-        setContentView(R.layout.activity_social_oauth2);
-
-        // 设置认证按钮，这必须在 OAuth2 认证界面初始化完成之后
-        LoginButton mFacebookSignInButton = (LoginButton)findViewById(R.id.facebook_sign_in_button);
-        if(null != fb) {
-            fb.registerSignInButton(mFacebookSignInButton, HomeActivity.class);
+            // 注册登录按钮
+            if (null != fb) {
+                fb.registerSignInButton(HomeActivity.class);
+            }
         }
     }
 
@@ -41,10 +39,6 @@ public class SocialSigninActivity extends AppCompatActivity {
     }
 
     private void initialOAuth2Sdk() {
-        initialFacebookSdk();
-    }
-
-    private void initialFacebookSdk() {
         if(null == fb) {
             fb = new FacebookSignIn();
         }
