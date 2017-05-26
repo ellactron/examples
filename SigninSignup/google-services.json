@@ -1,0 +1,103 @@
+{
+  "project_info": {
+    "project_number": "1002644045616",
+    "project_id": "ellactron"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002644045616:android:e9c62ff1da445eed",
+        "android_client_info": {
+          "package_name": "com.ellactron.examples"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002644045616-g3jfo3pc06umn25qpj96lls0hrr8m1jt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ellactron.examples",
+            "certificate_hash": "f8e788c5842e3e45164b1b2310cd9185113fe941"
+          }
+        },
+        {
+          "client_id": "1002644045616-2bp9a0rfdb4fui9ai028o6os8a0dbre7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ellactron.examples",
+            "certificate_hash": "a9686284ff029de5b21525155d2e29dc9a98d6a5"
+          }
+        },
+        {
+          "client_id": "1002644045616-euh79t01dh50s36fv2kt6b9chlpdliop.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOBvMYr-QvTARs5nqpi7fURaAh-8_v_eI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002644045616:android:39201c1e55d969b4",
+        "android_client_info": {
+          "package_name": "com.ellactron.examples.signinsignup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002644045616-03dlr5ct2f7tej9ht7kb30n383n73ig3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ellactron.examples.signinsignup",
+            "certificate_hash": "f8e788c5842e3e45164b1b2310cd9185113fe941"
+          }
+        },
+        {
+          "client_id": "1002644045616-euh79t01dh50s36fv2kt6b9chlpdliop.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1002644045616-ljp1179hd1i562vs7mv0dqc26kat5jat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ellactron.examples.signinsignup",
+            "certificate_hash": "a9686284ff029de5b21525155d2e29dc9a98d6a5"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOBvMYr-QvTARs5nqpi7fURaAh-8_v_eI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
