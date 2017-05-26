@@ -26,10 +26,6 @@ public class FacebookSignIn {
     CallbackManager mFacebookCallbackManager;
     FragmentActivity activity;
 
-    public FacebookSignIn(/*FragmentActivity activity*/) {
-        //initialFacebookSdk(activity);
-    }
-
     public Profile getFacebookProfile(){
         // 1) 初始化认证SDK
         if(!FacebookSdk.isInitialized())
