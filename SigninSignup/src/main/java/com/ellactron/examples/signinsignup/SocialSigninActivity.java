@@ -1,5 +1,6 @@
 package com.ellactron.examples.signinsignup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,7 @@ import com.ellactron.examples.signinsignup.facebook.FacebookSignIn;
 import com.facebook.login.widget.LoginButton;
 
 public class SocialSigninActivity extends AppCompatActivity {
-    /*static*/ FacebookSignIn fb;
+    static FacebookSignIn fb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,8 +19,7 @@ public class SocialSigninActivity extends AppCompatActivity {
         initialOAuth2Sdk();
 
         if(isUserLoggedIn()) {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
+            showMainWindow();
             return;
         }
 
@@ -47,11 +47,18 @@ public class SocialSigninActivity extends AppCompatActivity {
 
     private void initialFacebookSdk() {
         if(null == fb) {
-            fb = new FacebookSignIn(this);
+            fb = new FacebookSignIn();
         }
+        fb.initialFacebookSdk(this);
     }
 
     private boolean isUserLoggedIn() {
         return (null == fb)?false:(null!=fb.getFacebookProfile());
     }
+
+    public void showMainWindow(){
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
+    }
 }
+

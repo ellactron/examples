@@ -26,9 +26,8 @@ public class FacebookSignIn {
     CallbackManager mFacebookCallbackManager;
     FragmentActivity activity;
 
-    public FacebookSignIn(FragmentActivity activity) {
-        this.activity = activity;
-        initialFacebookSdk();
+    public FacebookSignIn(/*FragmentActivity activity*/) {
+        //initialFacebookSdk(activity);
     }
 
     public Profile getFacebookProfile(){
@@ -42,7 +41,9 @@ public class FacebookSignIn {
         return profile;
     }
 
-    private void initialFacebookSdk() {
+    public void initialFacebookSdk(FragmentActivity activity) {
+        this.activity = activity;
+
         // 1) 初始化认证SDK
         if(!FacebookSdk.isInitialized())
             FacebookSdk.sdkInitialize(activity.getApplicationContext());
@@ -87,8 +88,7 @@ public class FacebookSignIn {
 
     protected void handleSignInResult(Callable logoutCallable, Class intentActivity) {
         if(null != logoutCallable) {
-            activity.startActivity(new Intent(activity, intentActivity));
-            activity.finish();
+            ((SocialSigninActivity)activity).showMainWindow();
         }
     }
 
