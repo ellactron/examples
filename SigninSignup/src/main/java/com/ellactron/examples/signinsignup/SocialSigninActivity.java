@@ -8,14 +8,16 @@ import com.ellactron.examples.signinsignup.facebook.FacebookSignIn;
 import com.facebook.login.widget.LoginButton;
 
 public class SocialSigninActivity extends AppCompatActivity {
-    FacebookSignIn fb;
+    /*static*/ FacebookSignIn fb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // 初始化认证SDK 并检查登录状态
-        if(initialOAuth2Sdk()) {
+        initialOAuth2Sdk();
+
+        if(isUserLoggedIn()) {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
             return;
@@ -39,17 +41,17 @@ public class SocialSigninActivity extends AppCompatActivity {
             fb.onActivityResult(requestCode, resultCode, data);
     }
 
-    private boolean initialOAuth2Sdk() {
-        if(initialFacebookSdk())
-            return true;
-
-        return false;
+    private void initialOAuth2Sdk() {
+        initialFacebookSdk();
     }
 
-    private boolean initialFacebookSdk() {
+    private void initialFacebookSdk() {
         if(null == fb) {
             fb = new FacebookSignIn(this);
         }
-        return fb.facebookInitiated();
+    }
+
+    private boolean isUserLoggedIn() {
+        return (null == fb)?false:(null!=fb.getFacebookProfile());
     }
 }

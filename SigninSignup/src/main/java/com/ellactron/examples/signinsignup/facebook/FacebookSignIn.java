@@ -31,40 +31,29 @@ public class FacebookSignIn {
         initialFacebookSdk();
     }
 
-    public boolean facebookInitiated(){
-        if(null != activity) {
-            // 1) 初始化认证SDK
-            FacebookSdk.sdkInitialize(activity.getApplicationContext());
-
-            // 2) 检查登录状态
-            Profile profile = Profile.getCurrentProfile().getCurrentProfile();
-            if(null != profile){
-                //activity.startActivity(new Intent(activity, HomeActivity.class));
-                //activity.finish();
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private boolean initialFacebookSdk() {
+    public Profile getFacebookProfile(){
         // 1) 初始化认证SDK
-        FacebookSdk.sdkInitialize(activity.getApplicationContext());
+        if(!FacebookSdk.isInitialized())
+            FacebookSdk.sdkInitialize(activity.getApplicationContext());
 
         // 2) 检查登录状态
         Profile profile = Profile.getCurrentProfile().getCurrentProfile();
-        if(null != profile){
-            //activity.startActivity(new Intent(activity, HomeActivity.class));
-            //activity.finish();
-            return true;
-        }
+
+        return profile;
+    }
+
+    private void initialFacebookSdk() {
+        // 1) 初始化认证SDK
+        if(!FacebookSdk.isInitialized())
+            FacebookSdk.sdkInitialize(activity.getApplicationContext());
+
+        // 2) 检查登录状态
+        Profile profile = Profile.getCurrentProfile().getCurrentProfile();
 
         // 3) 如果未登录，建立回调管理器
-        mFacebookCallbackManager = CallbackManager.Factory.create();
-
-        // 返回为登录状态
-        return false;
+        if(null == profile){
+            mFacebookCallbackManager = CallbackManager.Factory.create();
+        }
     }
 
     public void registerSignInButton(LoginButton mFacebookSignInButton, final Class intentActivity) {
