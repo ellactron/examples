@@ -1,11 +1,9 @@
 package com.ellactron.examples.signinsignup.facebook;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.ellactron.examples.signinsignup.HomeActivity;
 import com.ellactron.examples.signinsignup.R;
 import com.ellactron.examples.signinsignup.SocialSigninActivity;
 import com.facebook.CallbackManager;
@@ -13,7 +11,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -54,7 +51,7 @@ public class FacebookSignIn {
         }
     }
 
-    public void registerSignInButton(final Class intentActivity) {
+    public void registerSignInButton(final Callable<Void> onSuccessCallback) {
         // 设置认证按钮，这必须在 OAuth2 认证界面初始化完成之后
         LoginButton mFacebookSignInButton = (LoginButton)activity.findViewById(R.id.facebook_sign_in_button);
 
@@ -62,34 +59,27 @@ public class FacebookSignIn {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
-                        // Use the Profile class to get information about the current user.
-                        handleSignInResult(new Callable<Void>() {
-                            @Override
-                            public Void call() throws Exception {
-                                LoginManager.getInstance().logOut();
-                                return null;
-                            }
-                        }, intentActivity);
+                        // TODO: Use the Profile class to get information about the current user.
+                        //
+
+                        try {
+                            onSuccessCallback.call();
+                        } catch (Exception e) {
+                            Log.d(this.getClass().getCanonicalName(), e.getMessage());
+                        }
                     }
 
                     @Override
                     public void onCancel() {
-                        handleSignInResult(null, intentActivity);
+                        Log.d(SocialSigninActivity.class.getCanonicalName(), "Action cancelled");
                     }
 
                     @Override
                     public void onError(FacebookException error) {
                         Log.d(SocialSigninActivity.class.getCanonicalName(), error.getMessage());
-                        handleSignInResult(null, intentActivity);
                     }
                 }
         );
-    }
-
-    protected void handleSignInResult(Callable logoutCallable, Class intentActivity) {
-        if(null != logoutCallable) {
-            ((SocialSigninActivity)activity).showMainWindow();
-        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

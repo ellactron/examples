@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.ellactron.examples.signinsignup.facebook.FacebookSignIn;
 
+import java.util.concurrent.Callable;
+
 public class SocialSigninActivity extends AppCompatActivity {
     static FacebookSignIn fb;
 
@@ -25,7 +27,13 @@ public class SocialSigninActivity extends AppCompatActivity {
 
             // 注册登录按钮
             if (null != fb) {
-                fb.registerSignInButton(HomeActivity.class);
+                fb.registerSignInButton(new Callable<Void>() {
+                    @Override
+                    public Void call() throws Exception {
+                        showMainWindow();
+                        return null;
+                    }
+                });
             }
         }
     }
