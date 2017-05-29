@@ -25,11 +25,6 @@ public class FacebookSignIn {
     FragmentActivity activity;
 
     public Profile getFacebookProfile(){
-        // 1) 初始化认证SDK
-        if(!FacebookSdk.isInitialized())
-            FacebookSdk.sdkInitialize(activity.getApplicationContext());
-
-        // 2) 检查登录状态
         Profile profile = Profile.getCurrentProfile().getCurrentProfile();
 
         return profile;

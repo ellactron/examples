@@ -26,15 +26,7 @@ public class SocialSigninActivity extends AppCompatActivity {
             setContentView(R.layout.activity_social_oauth2);
 
             // 注册登录按钮
-            if (null != fb) {
-                fb.registerSignInButton(new Callable<Void>() {
-                    @Override
-                    public Void call() throws Exception {
-                        showMainWindow();
-                        return null;
-                    }
-                });
-            }
+            registerLogInButon();
         }
     }
 
@@ -55,6 +47,19 @@ public class SocialSigninActivity extends AppCompatActivity {
 
     private boolean isUserLoggedIn() {
         return (null == fb)?false:(null!=fb.getFacebookProfile());
+    }
+
+    private void registerLogInButon() {
+        // 注册登录按钮
+        if (null != fb) {
+            fb.registerSignInButton(new Callable<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    showMainWindow();
+                    return null;
+                }
+            });
+        }
     }
 
     public void showMainWindow(){
