@@ -6,11 +6,13 @@ import android.util.Log;
 
 import com.ellactron.examples.signinsignup.R;
 import com.ellactron.examples.signinsignup.SocialSigninActivity;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -25,7 +27,7 @@ public class FacebookSignIn {
     FragmentActivity activity;
 
     public Profile getFacebookProfile(){
-        Profile profile = Profile.getCurrentProfile().getCurrentProfile();
+        Profile profile = Profile.getCurrentProfile();
 
         return profile;
     }
@@ -38,7 +40,7 @@ public class FacebookSignIn {
             FacebookSdk.sdkInitialize(activity.getApplicationContext());
 
         // 2) 检查登录状态
-        Profile profile = Profile.getCurrentProfile().getCurrentProfile();
+        Profile profile = Profile.getCurrentProfile();
 
         // 3) 如果未登录，建立回调管理器
         if(null == profile){
@@ -54,24 +56,36 @@ public class FacebookSignIn {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(final LoginResult loginResult) {
-                        // TODO: Use the Profile class to get information about the current user.
-                        //
+                        ProfileTracker profileTracker = new ProfileTracker() {
+                            @Override
+                            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                                this.stopTracking();
 
-                        try {
-                            onSuccessCallback.call();
-                        } catch (Exception e) {
-                            Log.d(this.getClass().getCanonicalName(), e.getMessage());
-                        }
+                                Log.d(this.getClass().getCanonicalName(),
+                                        "Login user Id: " + Profile.getCurrentProfile().getId());
+                                Profile.setCurrentProfile(currentProfile);
+
+                                Log.d(this.getClass().getCanonicalName(),
+                                        "Current access token: " + AccessToken.getCurrentAccessToken().getToken());
+
+                                try {
+                                    onSuccessCallback.call();
+                                } catch (Exception e) {
+                                    Log.d(this.getClass().getCanonicalName(), e.getMessage());
+                                }
+                            }
+                        };
+                        profileTracker.startTracking();
                     }
 
                     @Override
                     public void onCancel() {
-                        Log.d(SocialSigninActivity.class.getCanonicalName(), "Action cancelled");
+                        Log.d(this.getClass().getCanonicalName(), "Action cancelled");
                     }
 
                     @Override
                     public void onError(FacebookException error) {
-                        Log.d(SocialSigninActivity.class.getCanonicalName(), error.getMessage());
+                        Log.d(this.getClass().getCanonicalName(), error.getMessage());
                     }
                 }
         );
