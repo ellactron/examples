@@ -6,8 +6,4 @@
 /captures
 .externalNativeBuild
 /.idea/
-.gitignore
-build.gradle
 libs/
-proguard-rules.pro
-src/main/res/drawable/
