@@ -1,1 +1,1 @@
-include ':IntroduceSlider', ':SigninSignup'
+include ':IntroduceSlider', ':SigninSignup', ':RestClient'

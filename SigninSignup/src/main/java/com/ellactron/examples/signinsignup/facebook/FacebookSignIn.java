@@ -75,7 +75,6 @@ public class FacebookSignIn {
                                 }
                             }
                         };
-                        profileTracker.startTracking();
                     }
 
                     @Override
