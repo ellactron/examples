@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ellactron.examples.interceptwebview.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <GridLayout
+        android:id="@+id/baseLayout"
+        android:layout_width="359dp"
+        android:layout_height="494dp"
+        android:rowCount="2"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <EditText
+            android:id="@+id/urlEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="http://10.192.113.253:8080" />
+
+    </GridLayout>
+
+</android.support.constraint.ConstraintLayout>
