@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="http://10.192.113.253:8080" />
+            android:text="http://192.168.10.51:8080" />
 
     </GridLayout>
 
