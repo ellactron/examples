@@ -1,12 +1,10 @@
 package com.ellactron.examples.interceptwebview;
 
-import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,13 +27,12 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
     WebView mWebView = null;
 
-    final String hostAddress = "://10.192.113.253";
+    final String hostAddress = "://192.168.255.1:8080";
     final String localResource = "/local/";
     String token = "xxx";
 
@@ -114,9 +111,26 @@ public class MainActivity extends AppCompatActivity {
         return mWebView;
     }
 
+    public static int getResId(String resName, Class<?> c) {
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private WebResourceResponse localRequest(WebResourceRequest req) {
-        return null;
+        String path = req.getUrl().toString();
+        path = path.substring(path.indexOf(localResource)+localResource.length());
+        int resourceId = getResId(path, Drawable.class);
+        if(-1 == resourceId)
+            return null;
+
+        InputStream raw = getResources().openRawResource(resourceId);
+        return new WebResourceResponse("image/png", "UTF-8", raw);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
