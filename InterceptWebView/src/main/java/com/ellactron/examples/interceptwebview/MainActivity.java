@@ -32,7 +32,7 @@ import java.lang.reflect.Field;
 public class MainActivity extends AppCompatActivity {
     WebView mWebView = null;
 
-    final String hostAddress = "://192.168.255.1:8080";
+    final String hostAddress = "://192.168.10.51:8080";
     final String localResource = "/local/";
     String token = "xxx";
 
@@ -111,13 +111,21 @@ public class MainActivity extends AppCompatActivity {
         return mWebView;
     }
 
-    public static int getResId(String resName, Class<?> c) {
+    public int getResId(String resName, Class<?> c) {
         try {
-            Field idField = c.getDeclaredField(resName);
-            return idField.getInt(idField);
+            int id = this.getResources().getIdentifier(resName,
+                    "drawable",
+                    this.getPackageName());
+            if (id == 0 && resName.contains(".")){
+                id = this.getResources().getIdentifier(resName.substring(0,
+                        resName.indexOf(".")),
+                        "drawable",
+                        this.getPackageName());
+            }
+            return id;
         } catch (Exception e) {
             e.printStackTrace();
-            return -1;
+            return 0;
         }
     }
 
@@ -126,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         String path = req.getUrl().toString();
         path = path.substring(path.indexOf(localResource)+localResource.length());
         int resourceId = getResId(path, Drawable.class);
-        if(-1 == resourceId)
+        if(0 == resourceId)
             return null;
 
         InputStream raw = getResources().openRawResource(resourceId);
