@@ -1,1 +1,1 @@
-include ':IntroduceSlider', ':SigninSignup', ':RestClient', ':InterceptWebView'
+include ':IntroduceSlider', ':SigninSignup', ':RestClient', ':InterceptWebView', ':DataPersistence'

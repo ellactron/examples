@@ -30,6 +30,7 @@ public class SocialSigninActivity extends AppCompatActivity {
         }
     }
 
+    // 添加 Facebook login 回调
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
